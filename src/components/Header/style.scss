@@ -1,0 +1,25 @@
+@import "../../scss/root.scss";
+@font-face {
+    font-family: OneLittleFont;
+    font-weight: 400;
+    font-style: normal;
+    src: url(../../fonts/OneLittleFontFull.otf);
+  }
+
+.OneLittleFont{
+    font-family: OneLittleFont;
+    font-size: 32px;
+    margin-left: 1rem;
+    color: var(--white-100);
+    text-transform: uppercase;
+}
+
+.bg-custom-primary {
+    background-color: var(--gray-100);
+}
+
+.badge-light {
+    color: var(--gray-100);
+    background-color: var(--white-100);
+    margin-left: 0.25rem;
+}
