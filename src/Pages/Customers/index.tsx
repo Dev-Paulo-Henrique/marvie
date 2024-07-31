@@ -4,6 +4,7 @@ import { api } from "../../services/api";
 import { Title } from "../../components/Title";
 import { CiSearch } from "react-icons/ci";
 import { Header } from "../Admin/Header";
+import { useAuth } from "../../contexts/AuthContext"
 
 interface UserProps {
   id: number;
@@ -15,20 +16,27 @@ interface UserProps {
 export function Customers() {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const { token } = useAuth();
 
   Title({ title: "Clientes" });
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsers = async (token: string | null) => {
       try {
-        const response = await api.get("/users");
+        const response = await api.get("/users", {
+          headers: {
+            "x-access-token":
+            token,
+          },
+        });
+        console.log(token)
         setUsers(response.data);
       } catch (error) {
         console.error("Erro ao buscar usuários:", error);
       }
     };
 
-    fetchUsers();
+    fetchUsers(token);
   }, []);
 
   useEffect(() => {
@@ -61,9 +69,12 @@ export function Customers() {
 
   return (
     <>
-      <Header title="Clientes" link="customers/new" textButton="Novo Cliente"/>
+      <Header title="Clientes" link="customers/new" textButton="Novo Cliente" />
       <div className="pb-4">
-        <div data-mdb-input-init className="form-outline mb-4 position-relative">
+        <div
+          data-mdb-input-init
+          className="form-outline mb-4 position-relative"
+        >
           <CiSearch className="position-absolute top-50 start-0 translate-middle-y ms-3" />
           <input
             type="text"

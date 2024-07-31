@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { useAuth } from "../../contexts/AuthContext"
 
 interface UserDataProps {
   id: number;
@@ -20,11 +21,18 @@ interface UserDataProps {
 export function Profile() {
   const [user, setUser] = useState<UserDataProps | null>(null);
   const { userId } = useParams<{ userId: string }>();
+  const { token } = useAuth();
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUser = async (token: string | null) => {
       try {
-        const response = await api.get(`/users/${userId}`);
+        const response = await api.get(`/users/${userId}`, {
+          headers: {
+            "x-access-token":
+            token,
+          },
+        });
+        console.log(token);
         console.log(response.data);
         setUser(response.data);
         document.title = response.data.nome;
@@ -33,7 +41,7 @@ export function Profile() {
       }
     };
 
-    fetchUser();
+    fetchUser(token);
   }, [userId]);
 
   async function handleDeleteUser() {

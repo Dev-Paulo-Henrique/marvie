@@ -2,7 +2,7 @@ import { useState } from "react";
 import { api } from "../../services/api";
 import Logo from "/logo.svg";
 import { Particle } from "../../components/Particle";
-import { toast } from "react-hot-toast"
+// import { toast } from "react-hot-toast"
 
 export function Login() {
   const [email, setEmail] = useState("");
@@ -36,10 +36,12 @@ export function Login() {
 
     try {
       const response = await api.post("/login", { email, senha });
-      toast.success(response.data);
-      setTimeout(() => {
+      // toast.success(response.data);
+      const { token } = response.data;
+      localStorage.setItem("authToken", token);
+      // setTimeout(() => {
         window.location.href = "/admin"
-      }, 2500)
+      // }, 2500)
     } catch (error) {
       setErrorMessage("Email ou senha incorretos");
     }

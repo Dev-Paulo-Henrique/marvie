@@ -12,26 +12,34 @@ import { AddCustomer } from "../Customers/AddCustomer";
 import { Profile } from "../Customers/Profile";
 import { AddProduct } from "../Products/AddProduct";
 
+import { AuthContextProvider } from "../../contexts/AuthContext";
+
 export function Admin() {
   return (
-    <div className="d-flex">
-      <Sidebar />
-      <div
-        className="p-4 w-100"
-        style={{ marginLeft: "280px", background: "#f7f7f8", height: "100vh" }}
-      >
-        <Routes>
-          <Route path="home" element={<Home />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="products" element={<Products />} />
-          <Route path="products/new" element={<AddProduct />} />
-          <Route path="customers" element={<Customers />} />
-          <Route path="customers/:userId" element={<Profile />} />
-          <Route path="customers/new" element={<AddCustomer />} />
-          {/* <Route path="logout" element={<Logout />} /> */}
-        </Routes>
+    <AuthContextProvider>
+      <div className="d-flex">
+        <Sidebar />
+        <div
+          className="p-4 w-100"
+          style={{
+            marginLeft: "280px",
+            background: "#f7f7f8",
+            height: "100vh",
+          }}
+        >
+          <Routes>
+            <Route path="home" element={<Home />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="products" element={<Products />} />
+            <Route path="products/new" element={<AddProduct />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="customers/:userId" element={<Profile />} />
+            <Route path="customers/new" element={<AddCustomer />} />
+            {/* <Route path="logout" element={<Logout />} /> */}
+          </Routes>
+        </div>
       </div>
-    </div>
+    </AuthContextProvider>
   );
 }
