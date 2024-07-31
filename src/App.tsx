@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Main } from "./Pages";
 import { Admin } from "./Pages/Admin";
 import { Toaster } from "react-hot-toast";
-import { Login } from "./Pages/Login";
+import { Login } from "./Pages/Auth/Login";
 
 const AppRoutes = () => {
   return (

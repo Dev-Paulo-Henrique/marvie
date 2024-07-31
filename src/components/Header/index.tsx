@@ -2,7 +2,7 @@ import "../../scss/styles.scss";
 import { Logo } from "../Logo";
 import { Search } from "../Search";
 import "./style.scss";
-import { CiShoppingCart } from "react-icons/ci";
+import { CiShoppingCart, CiUser } from "react-icons/ci";
 
 interface HeaderProps {
   role?: string;
@@ -36,13 +36,13 @@ export function Header({ role }: HeaderProps) {
             ) : (
               <>
                 <Search />
-                <div className="d-flex justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-center gap-3">
+                  <a href="/login" className="d-block link-dark text-decoration-none">
+                  <CiUser color="#FFFFFF" size={32}/>
+                  </a>
                   <a
                     href="#"
                     className="d-block link-dark text-decoration-none"
-                    id="dropdownUser1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
                   >
                     <CiShoppingCart color="#FFFFFF" size={32} />
                     <span className="badge badge-light text-dark">4</span>
